@@ -85,7 +85,7 @@
 
 		.friends {
 			width: 450px;
-			height: 100%;
+			height: auto;
 			box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
 			float: right;
 		}
@@ -180,6 +180,64 @@
 			font-weight: normal;
 		}
 
+		.fri-main {
+			width: 100%;
+			height: 500px;
+			overflow-y: scroll;
+		}
+		.fri-main ul {
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			list-style-type: none;
+		}
+		.fri-main ul li {
+			width: 100%;
+			height: 100px;
+			padding: 15px 20px;
+			border-bottom: 1px solid rgb(217,217,217);
+			box-sizing: border-box;
+		}
+		.fri-main ul li .avatar {
+			float: left;
+			width: 70px;
+			height: 70px;
+			border-radius: 50%;
+			border: 3px solid rgba(217,217,217,0.8);
+			box-sizing: border-box;
+			overflow: hidden;
+		}
+		 .avatar-right {
+			width: 100%;
+			height: 100%;
+			padding-left: 90px;
+			box-sizing: border-box;
+		}
+		.fri-main ul li .avatar-right .avatar-default {
+			display: block;
+		}
+		.fri-main ul li .avatar-right .avatar-name {
+			font-size: 1.8rem;
+			color: rgb(0,167,157);
+			margin-top: 10px;
+			overflow-x: hidden;
+			text-overflow:ellipsis;
+			white-space:nowrap;
+		}
+		.avatar-name #rf-count {
+			font-size: 1.4rem;
+			color: gray;
+			padding-left: 5px;
+		}
+		.fri-main ul li .avatar-right .avatar-tag {
+			font-size: 1.4rem;
+			color: gray;
+			margin-top: 10px;
+			overflow-x: hidden;
+			text-overflow:ellipsis;
+			white-space:nowrap;
+		}
+
 	</style>
 </head>
 <body>
@@ -219,10 +277,87 @@
 		<div class="statistics">
 			<ul>
 				<li><span id="stat-friends">1486</span><span class="stat-default">Friends</span></li>
-				<li class="middle-list"><span id="stat-normals">486</span><span class="stat-default">Normals</span></li>
+				<li class="middle-list"><span id="stat-rooms">486</span><span class="stat-default">Rooms</span></li>
 				<li><span id="stat-unread">1789</span><span class="stat-default">Unread</span></li>
 			</ul>
 		</div>
+		<div class="fri-main">
+			<ul>
+				<li>
+					<div class="avatar">
+						<img src="user.jpeg" width="100%" height="100%">
+					</div>
+					<div class="avatar-right">
+						<div class="avatar-default avatar-name">
+							<span id="rf-name">生人勿进、(╯3╰</span>
+							<span id="rf-count">(218人)</span>
+						</div>
+						<span class="avatar-default avatar-tag" title="这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下">这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下</span>
+					</div>
+				</li>
+				<li>
+					<div class="avatar">
+						<img src="user.jpeg" width="100%" height="100%">
+					</div>
+					<div class="avatar-right">
+						<div class="avatar-default avatar-name">
+							<span id="rf-name">生人勿进、(╯3╰</span>
+							<span id="rf-count">(218人)</span>
+						</div>
+						<span class="avatar-default avatar-tag" title="这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下">这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下</span>
+					</div>
+				</li>
+				<li>
+					<div class="avatar">
+						<img src="user.jpeg" width="100%" height="100%">
+					</div>
+					<div class="avatar-right">
+						<div class="avatar-default avatar-name">
+							<span id="rf-name">生人勿进、(╯3╰</span>
+							<span id="rf-count">(218人)</span>
+						</div>
+						<span class="avatar-default avatar-tag" title="这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下">这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下</span>
+					</div>
+				</li>
+				<li>
+					<div class="avatar">
+						<img src="user.jpeg" width="100%" height="100%">
+					</div>
+					<div class="avatar-right">
+						<div class="avatar-default avatar-name">
+							<span id="rf-name">生人勿进、(╯3╰</span>
+							<span id="rf-count">(218人)</span>
+						</div>
+						<span class="avatar-default avatar-tag" title="这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下">这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下</span>
+					</div>
+				</li>
+				<li>
+					<div class="avatar">
+						<img src="user.jpeg" width="100%" height="100%">
+					</div>
+					<div class="avatar-right">
+						<div class="avatar-default avatar-name">
+							<span id="rf-name">生人勿进、(╯3╰</span>
+							<span id="rf-count">(218人)</span>
+						</div>
+						<span class="avatar-default avatar-tag" title="这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下">这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下</span>
+					</div>
+				</li>
+				<li>
+					<div class="avatar">
+						<img src="user.jpeg" width="100%" height="100%">
+					</div>
+					<div class="avatar-right">
+						<div class="avatar-default avatar-name">
+							<span id="rf-name">生人勿进、(╯3╰</span>
+							<span id="rf-count">(218人)</span>
+						</div>
+						<span class="avatar-default avatar-tag" title="这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下">这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下</span>
+					</div>
+				</li>
+			</ul>
+		</div>
 	</div>
+
 </body>
 </html>
