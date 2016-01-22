@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<title>HighTalk首页</title>
+	<style type="text/css">
+		html {
+			width: 100%;
+			height: 100%;
+			font-size: 62.5%;
+		}
+
+		body {
+			font-family: "微软雅黑";
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			min-width: 1366px;
+			overflow-x: auto;
+		}
+		header {
+			width: 100%;
+			height: 60px;
+			padding-left: 50px;
+			background-color: rgb(0,167,157);
+			box-sizing: border-box;
+		}
+		header .ul-all {
+			max-width: 1000px;
+			height: 100%;
+			margin: 0px;
+			padding: 0px;
+			list-style-type: none;
+			text-align: center;
+			line-height: 60px;
+			overflow-x: hidden;
+			/*解决ul宽度异常问题*/
+			float: left;
+		}
+		header .ul-all li {
+			width: 110px;
+			height: 100%;
+			float: left;
+			color: white;
+			font-size: 1.7rem;
+		}
+		.logo {
+			width: 150px;
+			height: 100%;
+			display: inline-block;
+			background: url('logo.png') left no-repeat;
+			background-size: 250% 100%;
+			float: left;
+		}
+		header .ul-all .ul-drop {
+			margin: 0;
+			padding: 0;
+			width: 110px;
+			height: 0;
+			list-style-type: none;
+			position: absolute;
+			top: 60px;
+			background-color: rgb(0,167,157);
+			transition: 0.5s ease height;
+			-webkit-transition: 0.5s ease height;
+			-moz-transition: 0.5s ease height;
+			overflow-y: hidden;
+		}
+		header .ul-all .ul-drop li {
+			width: 100%;
+			height: 60px;
+		}
+		header .ul-all .drop-menu:hover .ul-drop {
+			height: 180px;
+		}
+		header .ul-all .drop-menu:hover #ul-end {
+			height: 120px;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<div class="logo"></div>
+		<ul class="ul-all">
+			<li>首页</li>
+			<li>个人</li>
+			<li>朋友圈</li>
+			<li class="drop-menu">状态
+				<ul class="ul-drop">
+					<li>在线</li>
+					<li>离开</li>
+					<li>隐身</li>
+				</ul>
+			</li>
+			<li class="drop-menu">退出
+				<ul class="ul-drop" id="ul-end">
+					<li>切换账号</li>
+					<a href="login.html"><li>退出账号</li></a>
+				</ul>
+			</li>
+		</ul>
+	</header>
+</body>
+</html>
