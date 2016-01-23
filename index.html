@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<title>HighTalk首页</title>
+	<link rel="stylesheet" type="text/css" href="css\Font-Awesome-3.2.1\css\font-awesome.min.css">
 	<style type="text/css">
 		html {
 			/*width: 100%;*/
@@ -20,6 +21,7 @@
 			height: 100%;
 			margin: 0;
 			min-width: 1366px;
+			min-height: 643px;
 			overflow-x: auto;
 			box-sizing: border-box;
 		}
@@ -82,7 +84,48 @@
 		header .ul-all .drop-menu:hover #ul-end {
 			height: 120px;
 		}
-
+		header .search {
+			float: right;
+			height: 100%;
+			padding-top: 18px;
+			margin-right: 50px;
+			box-sizing: border-box;
+		}
+		header .search input {
+			width: 0;
+			height: 25px;
+			font-family: "微软雅黑";
+			font-size: 1.5rem;
+			color: white;
+			transition: 0.5s ease width;
+			-webkit-transition: 0.5s ease width;
+			-moz-transition: 0.5s ease width;
+			border: none;
+			background-color: rgb(0,167,157);
+			margin-left: 10px;
+			box-sizing: border-box;
+			outline: none;
+			cursor: pointer;
+		}
+		header i {
+			font-size: 2.3rem;
+			font-weight: normal;
+			color: white;
+			vertical-align: middle;
+			transition: 0.5s ease color;
+			-webkit-transition: 0.5s ease color;
+			-moz-transition: 0.5s ease color;
+			cursor: pointer;
+		}
+		header i:hover, header i:focus {
+			color: rgb(0,137,157);
+		}
+		header .search i:active input, header .search i:hover input, header .search i input:hover, header .search i input:focus {
+			border-right: 1px solid rgb(0,137,157);
+			padding-right: 10px;
+			width: 250px;
+			cursor: auto;
+		}
 		.friends {
 			width: 450px;
 			height: auto;
@@ -150,6 +193,8 @@
 			width: 100%;
 			height: 80px;
 			background-color: rgb(0,167,157);
+			border-bottom: 1px dashed white;
+			box-sizing: border-box;
 		}
 		.statistics ul {
 			margin: 0;
@@ -183,7 +228,7 @@
 		.fri-main {
 			width: 100%;
 			height: 500px;
-			overflow-y: scroll;
+			overflow-y: auto;
 		}
 		.fri-main ul {
 			margin: 0;
@@ -197,6 +242,7 @@
 			padding: 15px 20px;
 			border-bottom: 1px solid rgb(217,217,217);
 			box-sizing: border-box;
+			position: relative;
 		}
 		.fri-main ul li .avatar {
 			float: left;
@@ -206,6 +252,20 @@
 			border: 3px solid rgba(217,217,217,0.8);
 			box-sizing: border-box;
 			overflow: hidden;
+		}
+		.fri-main ul li .unread-count {
+			display: block;
+			width: auto;
+			height: auto;
+			padding: 0 3px;
+			border-radius: 8px;
+			background-color: red;
+			color: white;
+			font-size: 1.3rem;
+			position: absolute;
+			top: 20px;
+			left: 70px;
+			z-index: 3;
 		}
 		 .avatar-right {
 			width: 100%;
@@ -261,6 +321,11 @@
 				</ul>
 			</li>
 		</ul>
+		<div class="search">
+			<i class="icon-search">
+				<input type="text" placeholder="请输入查询的内容……">
+			</i>
+		</div>
 	</header>
 	<div class="friends">
 		<div class="fri-head">
@@ -287,6 +352,32 @@
 					<div class="avatar">
 						<img src="user.jpeg" width="100%" height="100%">
 					</div>
+					<span class="unread-count">6000</span>
+					<div class="avatar-right">
+						<div class="avatar-default avatar-name">
+							<span id="rf-name">生人勿进、(╯3╰</span>
+							<span id="rf-count">(218人)</span>
+						</div>
+						<span class="avatar-default avatar-tag" title="这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下">这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下</span>
+					</div>
+				</li>
+				<li>
+					<div class="avatar">
+						<img src="user.jpeg" width="100%" height="100%">
+					</div>
+					<div class="avatar-right">
+						<div class="avatar-default avatar-name">
+							<span id="rf-name">生人勿进、(╯3╰</span>
+							<span id="rf-count">(218人)</span>
+						</div>
+						<span class="avatar-default avatar-tag" title="这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下">这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下</span>
+					</div>
+				</li>
+				<li>
+					<div class="avatar">
+						<img src="user.jpeg" width="100%" height="100%">
+					</div>
+					<span class="unread-count">12345</span>
 					<div class="avatar-right">
 						<div class="avatar-default avatar-name">
 							<span id="rf-name">生人勿进、(╯3╰</span>
@@ -319,42 +410,7 @@
 						<span class="avatar-default avatar-tag" title="这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下">这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下</span>
 					</div>
 				</li>
-				<li>
-					<div class="avatar">
-						<img src="user.jpeg" width="100%" height="100%">
-					</div>
-					<div class="avatar-right">
-						<div class="avatar-default avatar-name">
-							<span id="rf-name">生人勿进、(╯3╰</span>
-							<span id="rf-count">(218人)</span>
-						</div>
-						<span class="avatar-default avatar-tag" title="这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下">这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下</span>
-					</div>
-				</li>
-				<li>
-					<div class="avatar">
-						<img src="user.jpeg" width="100%" height="100%">
-					</div>
-					<div class="avatar-right">
-						<div class="avatar-default avatar-name">
-							<span id="rf-name">生人勿进、(╯3╰</span>
-							<span id="rf-count">(218人)</span>
-						</div>
-						<span class="avatar-default avatar-tag" title="这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下">这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下</span>
-					</div>
-				</li>
-				<li>
-					<div class="avatar">
-						<img src="user.jpeg" width="100%" height="100%">
-					</div>
-					<div class="avatar-right">
-						<div class="avatar-default avatar-name">
-							<span id="rf-name">生人勿进、(╯3╰</span>
-							<span id="rf-count">(218人)</span>
-						</div>
-						<span class="avatar-default avatar-tag" title="这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下">这是一个测试的群组，不要以为这很吊，要用一个加长版的tag来测试一下</span>
-					</div>
-				</li>
+
 			</ul>
 		</div>
 	</div>
