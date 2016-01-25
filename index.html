@@ -351,6 +351,7 @@
 			padding: 0 5px;
 			border-radius: 7px;
 			color: white;
+			text-align: center;
 		}
 		.talk-users ul li .talk-users-img {
 			width: 30px;
@@ -408,6 +409,16 @@
 			height: 30px;
 			line-height: 30px;
 			background-color: rgb(0,167,157);
+			padding-left: 20px;
+			font-size: 1.8rem;
+			box-sizing: border-box;
+		}
+		.talk-sending .talk-tools i {
+			margin-right: 10px;
+			color: rgb(42,42,42);
+		}
+		.talk-sending .talk-tools i:nth-child(4) {
+			color: red;
 		}
 		.talk-sending .talk-editor {
 			width: 100%;
@@ -417,20 +428,39 @@
 		.talk-sending .talk-editor textarea {
 			width: 100%;
 			height: 168px;
-			padding-right: 110px;
+			padding: 10px 110px 10px 10px;
 			border-bottom: 2px solid rgb(0,167,157);
+			font-family: "微软雅黑";
+			font-size: 1.5rem;
 			border: none;
 			outline: none;
 			resize:none;
+			word-break:break-all;
+			word-wrap:break-word;
 			box-sizing: border-box;
 		}
 		.talk-sending .talk-editor #btn-sending {
 			position: absolute;
 			width: 60px;
 			height: 60px;
+			font-size: 3.5rem;
+			font-weight: 100;
+			background-color: rgb(0,167,157);
+			color: white;
+			border: none;
+			border-radius: 5px;
 			top: 50%;
 			right: 30px;
 			margin-top: -30px;
+			box-shadow: 0 3px 10px black;
+			outline: none;
+			transition: 0.2s ease all;
+			-webkit-transition: 0.2s ease all;
+			-moz-transition: 0.2s ease all;
+		}
+		.talk-sending .talk-editor #btn-sending:active {
+			box-shadow: 0 0 2px rgb(42,42,42);;
+			background-color: rgb(0,147,157);
 		}
 	</style>
 </head>
@@ -668,11 +698,17 @@
 					</ul>
 				</div>
 				<div class="talk-sending">
-					<div class="talk-tools">工具栏待设计</div>
+					<div class="talk-tools">
+						<i class="icon-laptop"></i>
+						<i class="icon-camera-retro"></i>
+						<i class="icon-trash"></i>
+						<i class="icon-heart"></i>
+						<i class="icon-eye-open"></i>
+					</div>
 					<div class="talk-editor">
 						<textarea></textarea>
 						<button id="btn-sending">
-							<i></i>
+							<i class="icon-ok"></i>
 						</button>
 					</div>
 				</div>
