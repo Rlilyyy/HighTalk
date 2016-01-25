@@ -298,6 +298,44 @@
 			white-space:nowrap;
 		}
 
+		.talk-main {
+			height: 760px;
+			margin-right: 450px;
+		}
+		.talk-main-table {
+			width: 100%;
+			height: 730px;
+			display: table;
+
+		}
+		.talk-initial {
+			width: 100%;
+			height: 30px;
+			background-color: rgb(0,167,157);
+			box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+		}
+		.talk-users {
+			width: 220px;
+			height: 730px;
+			border-right: 2px solid rgb(0,167,157);
+			display: table-cell;
+			box-sizing: border-box;
+		}
+		.talk-cs {
+			height: 730px;
+			display: table-cell;
+			box-sizing: border-box;
+		}
+		.talk-chating {
+			width: 100%;
+			height: 530px;
+			border-bottom: 2px solid rgb(0,167,157);
+			box-sizing: border-box;
+		}
+		.talk-sending {
+			width: 100%;
+			height: 200px;
+		}
 	</style>
 </head>
 <body>
@@ -414,6 +452,16 @@
 			</ul>
 		</div>
 	</div>
-
+	<!-- talk-main必须在friends之后，否则布局 -->
+	<div class="talk-main">
+		<div class="talk-initial"></div>
+		<div class="talk-main-table">
+			<div class="talk-users"></div>
+			<div class="talk-cs">
+				<div class="talk-chating"></div>
+				<div class="talk-sending"></div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
