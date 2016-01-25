@@ -305,8 +305,6 @@
 		.talk-main-table {
 			width: 100%;
 			height: 730px;
-			display: table;
-
 		}
 		.talk-initial {
 			width: 100%;
@@ -318,12 +316,39 @@
 			width: 220px;
 			height: 730px;
 			border-right: 2px solid rgb(0,167,157);
-			display: table-cell;
+			float: left;
 			box-sizing: border-box;
+		}
+		.talk-users ul {
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			height: 100%;
+			list-style-type: none;
+		}
+		.talk-users ul li {
+			width: 100%;
+			height: 41px;
+			border-bottom: 1px solid rgb(217,217,217);
+			padding: 5px;
+			line-height: 30px;
+			box-sizing: border-box;
+		}
+		.talk-users ul li .talk-users-img {
+			width: 30px;
+			height: 30px;
+			float: left;
+			border-radius: 50%;
+			border: 1px solid rgb(0,167,157);
+			overflow: hidden;
+			box-sizing: border-box;
+		}
+		.talk-users ul li #talk-users-nickname {
+			margin-left: 10px;
 		}
 		.talk-cs {
 			height: 730px;
-			display: table-cell;
+			margin-left: 220px;
 			box-sizing: border-box;
 		}
 		.talk-chating {
@@ -456,7 +481,63 @@
 	<div class="talk-main">
 		<div class="talk-initial"></div>
 		<div class="talk-main-table">
-			<div class="talk-users"></div>
+			<div class="talk-users">
+				<ul>
+					<li>
+						<i class="">
+							<span id="room-users-count"></span>
+						</i>
+					</li>
+					<li>
+						<div class="talk-users-img">
+							<img src="user.jpeg" width="100%" height="100%">
+						</div>
+						<span id="talk-users-nickname">大保健</span>
+					</li>
+					<li>
+						<div class="talk-users-img">
+							<img src="user.jpeg" width="100%" height="100%">
+						</div>
+						<span id="talk-users-nickname">大保健</span>
+					</li>
+					<li>
+						<div class="talk-users-img">
+							<img src="user.jpeg" width="100%" height="100%">
+						</div>
+						<span id="talk-users-nickname">大保健</span>
+					</li>
+					<li>
+						<div class="talk-users-img">
+							<img src="user.jpeg" width="100%" height="100%">
+						</div>
+						<span id="talk-users-nickname">大保健</span>
+					</li>
+					<li>
+						<div class="talk-users-img">
+							<img src="user.jpeg" width="100%" height="100%">
+						</div>
+						<span id="talk-users-nickname">大保健</span>
+					</li>
+					<li>
+						<div class="talk-users-img">
+							<img src="user.jpeg" width="100%" height="100%">
+						</div>
+						<span id="talk-users-nickname">大保健</span>
+					</li>
+					<li>
+						<div class="talk-users-img">
+							<img src="user.jpeg" width="100%" height="100%">
+						</div>
+						<span id="talk-users-nickname">大保健</span>
+					</li>
+					<li>
+						<div class="talk-users-img">
+							<img src="user.jpeg" width="100%" height="100%">
+						</div>
+						<span id="talk-users-nickname">大保健</span>
+					</li>
+				</ul>
+			</div>
 			<div class="talk-cs">
 				<div class="talk-chating"></div>
 				<div class="talk-sending"></div>
