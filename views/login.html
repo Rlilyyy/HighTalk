@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<title>{{title}}</title>
+	<style type="text/css">
+		html {
+			font-size: 62.5%;
+			height: 100%;
+		}
+		body {
+			height: 100%;
+			font-size: 2rem;
+			font-family: "微软雅黑";
+			margin: 0;
+			background: url('login5.jpg') no-repeat center;
+			background-size: 100% 100%;
+			overflow-x: hidden;
+		}
+		body .hide {
+			opacity: 0;
+			left: 3000px;
+
+		}
+		.default {
+			background-color: rgba(217,217,217,0.8);
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transition: 0.5s ease all;
+			-webkit-transition: 0.5s ease all;
+			-moz-transition: 0.5s ease all;
+		}
+		.login {
+			width: 400px;
+			height: 300px;
+			margin-left: -200px;
+			margin-top: -150px;
+			border-radius: 5px;
+		}
+		.register {
+			width: 400px;
+			height: 420px;
+			margin-left: -200px;
+			margin-top: -210px;
+			border-radius: 5px;
+		}
+		.login input,.register input[type="text"],.register input[type="password"],.register input[type="submit"] {
+			width: 370px;
+			height: 50px;
+			border-radius: 3.5px;
+			border: 1px solid rgb(193,205,205);
+			display: block;
+			margin: 15px auto;
+			padding: 5px 15px;
+			outline: none;
+			font-size: 1.6rem;
+			box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			transition: 0.5s ease border;
+			-webkit-transition: 0.5s ease border;
+			-moz-transition: 0.5s ease border;
+		}
+		input[type="text"]:hover,input[type="password"]:hover {
+			border-color: rgb(150,150,150);
+		}
+		.login #username {
+			margin-top: 80px;
+		}
+		.login #submit {
+			font-size: 1.7rem;
+			font-family: "微软雅黑";
+			color: white;
+			background-color: rgb(0,167,157);
+			margin-bottom: 10px;
+		}
+		.register input[type="submit"] {
+			font-size: 1.7rem;
+			font-family: "微软雅黑";
+			color: white;
+			background-color: rgb(0,167,157);
+		}
+
+		#username:focus,#password:focus,.register input[type="text"]:focus,.register input[type="password"]:focus {
+			border-color: rgb(0,167,157);
+		}
+		.register input[type="radio"] {
+			margin-left: 15px;
+		}
+		.register label {
+			font-size: 1.7rem;
+		}
+		.img-user {
+			position: absolute;
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+			border: 5px solid rgb(0,167,157);
+			box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			left: 50%;
+			top: -50px;
+			margin-left: -50px;
+			overflow: hidden;
+			/*background: url('user.jpg') no-repeat center;*/
+		}
+		input[type="submit"]:active,#submit:active {
+			background-color: rgb(0,167,137);
+		}
+
+		input {
+			font-family: "微软雅黑";
+		}
+		#goRegister,#goLogin {
+			font-size: 1.4rem;
+			float: right;
+			padding-right: 15px;
+			color: black;
+		}
+	</style>
+</head>
+<body>
+	<div class="login default" id="login">
+		<div class="img-user">
+			<img id="img-default" src="user.jpeg" width="90px" height="90px">
+		</div>
+		<form action="/login" autocomplete="off">
+			<input type="text" placeholder="请输入你的账号或邮箱" id="username" name="username" autofocus="autofocus">
+			<input type="password" placeholder="请输入你的密码" id="password" name="password" pattern="^[A-Za-z0-9]{6,22}$" title="密码至少6位且密码不能有特殊字符(#、$、%等)">
+			<input type="submit" id="submit" value="登录">
+			<a href="#" id="goRegister">没有账号？去注册！</a>
+		</form>
+	</div>
+	<div class="register default hide" id="register">
+		<form action="/login" autocomplete="off" method="post">
+			<input type="text" name="nickname" placeholder="请输入你的昵称">
+			<input type="radio" name="sex" value="male" id="male"><label for="male">男</label>
+			<input type="radio" name="sex" value="female" id="female"><label for="female">女</label>
+			<input type="text" name="username" placeholder="请输入你的账号">
+			<input type="password" name="password" placeholder="请输入你的密码" pattern="^[A-Za-z0-9]{6,22}$" title="密码至少6位且密码不能有特殊字符(#、$、%等)">
+			<input type="password" name="cofirm" placeholder="请确认你的密码">
+			<input type="submit" value="提交注册">
+			<a href="#" id="goLogin">已有账号？去登录！</a>	
+		</form>
+	</div>
+	<script type="text/javascript">
+		(function() {
+			var hideFlag = false;
+			var loginDom = document.getElementById("login");
+			var registerDom = document.getElementById("register");
+
+			var loginDefaultClass = "login default";
+			var regDefaultClass = "register default";
+			var hideClassName = " hide";
+
+			var goLogin = document.getElementById("goLogin");
+			var goRegister = document.getElementById("goRegister");
+
+			var goEvent = function() {
+				hideFlag = !hideFlag;
+				if(hideFlag) {
+					registerDom.style.display = "block";
+					loginDom.className += hideClassName;
+					registerDom.className = regDefaultClass;
+				}else {
+					loginDom.style.display = "block";
+					registerDom.className += hideClassName;
+					loginDom.className = loginDefaultClass;
+				}
+			}
+
+			goLogin.onclick = goEvent;
+			goRegister.onclick = goEvent;
+		})();
+	</script>
+</body>
+</html>
