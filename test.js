@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var mysql = require('mysql');
 var app = express();
+var router = express.Router();
 
 var DATABASE = "testdb";
 var TABLE = "user";
