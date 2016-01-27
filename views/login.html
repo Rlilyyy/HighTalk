@@ -125,7 +125,7 @@
 		<div class="img-user">
 			<img id="img-default" src="user.jpeg" width="90px" height="90px">
 		</div>
-		<form action="/login" autocomplete="off">
+		<form action="/doLogin" autocomplete="off" method="post">
 			<input type="text" placeholder="请输入你的账号或邮箱" id="username" name="username" autofocus="autofocus">
 			<input type="password" placeholder="请输入你的密码" id="password" name="password" pattern="^[A-Za-z0-9]{6,22}$" title="密码至少6位且密码不能有特殊字符(#、$、%等)">
 			<input type="submit" id="submit" value="登录">
@@ -133,7 +133,7 @@
 		</form>
 	</div>
 	<div class="register default hide" id="register">
-		<form action="/login" autocomplete="off" method="post">
+		<form action="/doRegister" autocomplete="off" method="post">
 			<input type="text" name="nickname" placeholder="请输入你的昵称">
 			<input type="radio" name="sex" value="male" id="male"><label for="male">男</label>
 			<input type="radio" name="sex" value="female" id="female"><label for="female">女</label>

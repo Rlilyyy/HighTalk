@@ -2,6 +2,8 @@ var express = require('express');
 var path = require('path');
 var hbs = require('hbs');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var mysql = require('mysql');
 var app = express();
 
@@ -11,6 +13,13 @@ var client = mysql.createConnection({
 	user: "root",
 	password: "8605358aa"
 });
+
+app.use(cookieParser());
+app.use(session({
+	secret:"bingo",
+	resave:false,
+	saveUninitialized:false
+}));
 
 client.connect();
 client.query("use " + DATABASE);
@@ -26,27 +35,42 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-// app.get('/', function(req, res) {
-// 	res.render("login", {title: "HighTalk Login1"});
-// })
+app.get('/', function(req, res) {
+	res.render("login", {title: "HighTalk Login1"});
+})
 
 app.get('/login', function(req, res) {
-	var str = "select * from " + TABLE + " where username=\"" + req.query.username + "\" and password=\"" + req.query.password + "\"";
-	console.log(str)
 	res.render("login", {title: "HighTalk Login"});
 })
 
 app.get('/index', function (req, res) {
-	res.render("index", {title: "HighTalk首页"});
+	var user = "NULL";
+	if(req.session.user) {
+		user = req.session.user;
+	}
+	res.render("index", {title: "HighTalk首页", nickname: user});
 });
 
-app.post('/login', function(req, res) {
+app.post('/doRegister', function(req, res) {
 	var str = "insert into " + TABLE + "(nickname,username,psw) values(\"" + req.body.nickname + "\",\"" + req.body.username + "\",\"" + req.body.password + "\")";
 	console.log(str+"\n\n\n")
 	client.query(str);
 	// client.end();
 	res.render("index", {title: "HighTalk首页", nickname: req.body.nickname});
 });
+
+app.post('/doLogin', function(req, res) {
+	var str = "select * from " + TABLE + " where username=\"" + req.body.username + "\" and psw=\"" + req.body.password + "\"";
+	
+	client.query(str, function(err, results) {
+		if(results.length) {
+			req.session.user = results[0].nickname;
+			res.redirect("/index");
+		}else {
+			res.redirect("/login");
+		}
+	});
+})
 
 var server = app.listen(8888, function () {
   var host = server.address().address;
