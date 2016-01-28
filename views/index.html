@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<title>{{title}}的首页</title>
 	<link rel="stylesheet" type="text/css" href="css\Font-Awesome-3.2.1\css\font-awesome.min.css">
-	<script src="/socket.io/socket.io.js"></script>
+	<script src="http://localhost:8889/socket.io/socket.io.js"></script>
 	<style type="text/css">
 		html {
 			/*width: 100%;*/
@@ -494,12 +494,12 @@
 		</div>
 	</header>
 	<div class="friends">
-		<div class="fri-head">
+		<div class="fri-head" id="u_id" data-uid={{user.uid}} data-nick={{user.nickname}}>
 			<div class="head-left">
 				<img src="images/user.jpeg" width="100%" height="100%">
 			</div>
 			<div class="head-right">
-				<span class="right-default right-name">{{nickname}}</span>
+				<span class="right-default right-name">{{user.nickname}}</span>
 				<span class="right-default right-area">GuandDong , JieYang</span>
 				<span class="right-default right-signature" title="45度角仰望天空，月亮代表我的心！Halo">45度角仰望天空，月亮代表我的心！Halo</span>
 				<span class="right-default right-default"></span>
@@ -607,8 +607,8 @@
 		<div class="talk-initial"></div>
 		<div class="talk-main-table">
 			<div class="talk-users">
-				<ul>
-					<li>
+				<ul id="user-list">
+					<!-- <li>
 						<i class="icon-user"></i>
 						当前在线<span id="room-users-count">8</span>人
 					</li>
@@ -659,7 +659,7 @@
 							<img src="images/user.jpeg" width="100%" height="100%">
 						</div>
 						<span id="talk-users-nickname">大保健7</span>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 			<div class="talk-cs">
@@ -741,9 +741,91 @@
 	</div>
 
 	<script type="text/javascript">
-		var btn = document.getElementById("btn-sending");
-		var socket = io.connect('ws://127.0.0.1:8888');
-		console.log(socket)
+		// var btn = document.getElementById("btn-sending");
+		// var socket = io.connect('ws://127.0.0.1:8889');
+		// socket.emit("message", {id:1,text:"hello"});
+		// socket.on("message1",function(msg) {
+		// 	console.log(msg)
+		// })
+		(function() {
+			var $ = function(id) {
+				return document.getElementById(id);
+			};
+
+			var socket = io.connect('ws://127.0.0.1:8889');
+			var userID = $("u_id").dataset.uid;
+			var roomID = 1;
+			var nickname = $("u_id").dataset.nick;
+			var roomCount = 1;
+
+			var CHAT = {
+				sendMsg: function(action, msg) {
+					if(action == "login") {
+						socket.emit("login", msg);
+					} else if(action == "message") {
+						socket.emit("message", msg);
+					}
+				},
+
+				updateRoomMsg: function(action, msg) {
+					var chatingMsg = 
+						action == "login"?"加入了聊天室" : "退出了聊天室";
+					console.log(msg.nickname + chatingMsg);
+
+					if(action == "init") {
+
+						$("user-list").innerHTML = "<li><i class=\"icon-user\"></i>当前在线<span id=\"room-users-count\">"+msg.userCount+"</span>人</li>";
+
+						for(var index in msg.users) {
+							$("user-list").innerHTML += "<li id=\""+msg.users[index].uid+"\"><div class=\"talk-users-img\"><img src=\"images/user.jpeg\" width=\"100%\" height=\"100%\"></div><span id=\"talk-users-nickname\">"+msg.users[index].nickname+"</span></li>"
+
+							msg.users[index]
+						}
+					}
+
+					if(action == "login") {
+						if(msg.uid == userID)
+							return;
+						roomCount++;
+						$("room-users-count").innerHTML = roomCount+"";
+						$("user-list").innerHTML += "<li id=\""+msg.uid+"\"><div class=\"talk-users-img\"><img src=\"images/user.jpeg\" width=\"100%\" height=\"100%\"></div><span id=\"talk-users-nickname\">"+msg.nickname+"</span></li>"
+					}
+
+					if(action == "logout") {
+						roomCount--;
+
+						$("room-users-count").innerHTML = roomCount;
+						$("user-list").removeChild($(msg.uid+""));
+
+						if(rid == userID)
+							socket.close();
+					}
+				},
+
+				init: function() {
+					socket.emit("init", {
+						uid: userID,
+						rid: roomID,
+						nickname: nickname
+					})
+				},
+
+				updateRoomID: function(rid) {
+					roomID = rid;
+				},
+			}
+
+			CHAT.init();
+			socket.on("init"+userID, function(msg) {
+				CHAT.updateRoomMsg("init", msg);
+			});
+			socket.on("login", function(msg) {
+				CHAT.updateRoomMsg("login", msg);
+			});
+			socket.on("logout", function(msg) {
+				CHAT.updateRoomMsg("logout", msg);
+			});
+		})();
 	</script>
 </body>
 </html>
