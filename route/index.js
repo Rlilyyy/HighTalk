@@ -19,9 +19,9 @@ router.get("/index", function(req, res) {
 		try{
 			client.query(str, function(err, results) {
 				if(results.length) {
-					res.render("index", {title: nickname, nickname: nickname, rooms: results});
+					res.render("index", {title: nickname, rooms: results, user: {uid: id, nickname: nickname}});
 				}else {
-					res.render("index", {title: nickname, nickname: nickname});
+					res.render("index", {title: nickname, nickname: nickname, user: {uid: id, nickname: nickname}});
 				}
 			})
 		}catch(e) {
