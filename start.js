@@ -61,6 +61,7 @@ io.on('connection', function(socket){
     	}
     	socket.rid = obj.rid;
     	socket.uid = obj.uid;
+    	socket.nickname = obj.nickname;
     	io.emit("init"+obj.uid, {
     		userCount: onlineRooms[obj.rid].userCount,
     		users: onlineRooms[obj.rid].users
@@ -81,7 +82,8 @@ io.on('connection', function(socket){
 
 	    	var msg = {
 	    		uid: socket.uid,
-	    		rid: socket.rid
+	    		rid: socket.rid,
+	    		nickname: socket.nickname
 	    	};
 	    	console.log(socket.rid)
         	io.emit("logout"+socket.rid, msg);
@@ -111,9 +113,9 @@ io.on('connection', function(socket){
 
 	    	var msg = {
 	    		uid: socket.uid,
-	    		rid: socket.rid
+	    		rid: socket.rid,
 	    	};
-	    	console.log(socket.rid)
+
         	io.emit("logout"+socket.rid, msg);
     	}
     })

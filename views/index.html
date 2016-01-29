@@ -389,11 +389,27 @@
 		.talk-chating ul li {
 			padding: 10px;
 		}
-		.talk-chating ul li span:nth-child(1) {
+		.talk-chating ul li .join-row .join {
+			display: inline-block !important;
+			height: 30px;
+			padding: 5px 8px;
+			background-color: rgba(199,199,199,0.8);
+			color: white;
+			border-radius: 15px;
+			box-sizing: border-box;
+		}
+		.talk-chating ul li .join-row {
+			text-align: center;
+		}
+
+		.talk-chating ul li div span:nth-child(1) {
 			display: block;
 			font-size: 1.5rem;
+			margin-left: 8px;
+			word-break:break-all;
+			word-wrap:break-word;
 		}
-		.talk-chating ul li span:nth-child(2) {
+		.talk-chating ul li div span:nth-child(2) {
 			display: inline-block;
 			margin-top: 5px;
 			min-width: 100px;
@@ -401,6 +417,8 @@
 			border-radius: 12px;
 			background-color: rgb(0,167,157);
 			color: white;
+			word-break:break-all;
+			word-wrap:break-word;
 		}
 		.talk-sending {
 			width: 100%;
@@ -666,17 +684,24 @@
 				<div class="talk-chating">
 					<ul id="talk-chating-ul">
 						<!-- <li>
+							<div class="join-row"><span class="join">某某人 加入了聊天室</span></div>
+						</li>
+						<li>
+							<div class="join-row"><span class="join">某某人 加入了聊天室</span></div>
+						</li> -->
+						<!-- <li>
 							<div>
 								<span>大保健</span>
 								<span>我先来测试一下</span>
 							</div>
-						</li>
-						<li>
+						</li>-->
+						<!-- <li>
 							<div>
 								<span>大保健</span>
 								<span>再来一条很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的测试一下</span>
 							</div>
-						</li>
+						</li> -->
+						<!--
 						<li>
 							<div>
 								<span>大保健</span>
@@ -763,9 +788,6 @@
 				},
 
 				updateRoomMsg: function(action, msg) {
-					var chatingMsg = 
-						action == "login"?"加入了聊天室" : "退出了聊天室";
-					console.log(msg.nickname + chatingMsg);
 
 					if(action == "init") {
 
@@ -785,12 +807,15 @@
 
 						roomCount++;
 						// 更新好友列表和人数统计
+						$("talk-chating-ul").innerHTML += "<li><div class=\"join-row\"><span class=\"join\">"+msg.nickname+" 加入了聊天室</span></div></li>"
 						$("room-users-count").innerHTML = roomCount+"";
 						$("user-list").innerHTML += "<li id=\""+msg.uid+"\"><div class=\"talk-users-img\"><img src=\"images/user.jpeg\" width=\"100%\" height=\"100%\"></div><span id=\"talk-users-nickname\">"+msg.nickname+"</span></li>"
 					}
 
 					if(action == "logout") {
 						roomCount--;
+						console.log(msg)
+						$("talk-chating-ul").innerHTML += "<li><div class=\"join-row\"><span class=\"join\">"+msg.nickname+" 退出了聊天室</span></div></li>"
 						$("room-users-count").innerHTML = roomCount;
 						$("user-list").removeChild($(msg.uid+""));
 
