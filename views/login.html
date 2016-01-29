@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="css\Font-Awesome-3.2.1\css\font-awesome.min.css">
 	<title>{{title}}</title>
 	<style type="text/css">
 		html {
@@ -41,7 +42,7 @@
 		}
 		.register {
 			width: 400px;
-			height: 420px;
+			height: 450px;
 			margin-left: -200px;
 			margin-top: -210px;
 			border-radius: 5px;
@@ -118,6 +119,51 @@
 			padding-right: 15px;
 			color: black;
 		}
+
+		#uname {
+			width: 330px;
+			margin: 15px 5px 15px 15px;
+			display: inline-block;
+		}
+		#check {
+			background-color: rgb(0,167,157);
+			padding: 5px 15px;
+			font-size: 1.4rem;
+			color: white;
+			cursor: pointer;
+		}
+		#check:active {
+			background-color: rgb(0,147,157);
+		}
+		#confirm-status {
+			height: 24px;
+			font-size: 1.4rem;
+			display: block;
+			text-align: right;
+			padding-top: 5px;
+			padding-right: 20px;
+		}
+		#confirm-psw {
+			margin-bottom: 0;
+		}
+		.confirm-true {
+			color: green !important;
+		}
+		.confirm-false {
+			color: red !important;
+		}
+		.icon-ok {
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			color: green;
+		}
+		.icon-remove {
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			color: red;
+		}
 	</style>
 </head>
 <body>
@@ -133,17 +179,24 @@
 		</form>
 	</div>
 	<div class="register default hide" id="register">
-		<form action="/login/doRegister" autocomplete="off" method="post">
-			<input type="text" name="nickname" placeholder="请输入你的昵称">
-			<input type="radio" name="sex" value="male" id="male"><label for="male">男</label>
-			<input type="radio" name="sex" value="female" id="female"><label for="female">女</label>
-			<input type="text" name="username" placeholder="请输入你的账号">
-			<input type="password" name="password" placeholder="请输入你的密码" pattern="^[A-Za-z0-9]{6,22}$" title="密码至少6位且密码不能有特殊字符(#、$、%等)">
-			<input type="password" name="cofirm" placeholder="请确认你的密码">
+		<form action="/login/doRegister" autocomplete="off" method="post" id="form-reg">
+			<input type="text" name="nickname" placeholder="请输入你的昵称" min="1" max="6" required="required">
+			<div>
+				<input type="radio" name="sex" value="男" id="male"><label for="male" checked>男</label>
+				<input type="radio" name="sex" value="女" id="female"><label for="female">女</label>
+			</div>
+			<input type="text" name="username" placeholder="请输入你的账号" id="uname" pattern="[a-z0-9]{6,16}" title="账号只能由6-16位的小写字母和数字组成" min="6" max="16" required="required">
+			<i class="icon-remove" id="check-status"></i>
+			<!-- <span id="check">检测用户名</span> -->
+			
+			<input type="password" name="password" placeholder="请输入你的密码" pattern="[A-Za-z0-9]{6,22}" title="密码至少6位且密码不能有特殊字符(#、$、%等)" id="psw" min="6" max="22" required="required">
+			<input type="password" name="cofirm" placeholder="请确认你的密码" id="confirm-psw" required="required">
+			<span id="confirm-status" class="confirm-true"></span>
 			<input type="submit" value="提交注册">
 			<a href="#" id="goLogin">已有账号？去登录！</a>	
 		</form>
 	</div>
+	<script src="/bjax.js"></script>
 	<script type="text/javascript">
 		(function() {
 			var hideFlag = false;
@@ -172,6 +225,59 @@
 
 			goLogin.onclick = goEvent;
 			goRegister.onclick = goEvent;
+		})();
+
+		(function() {
+			var checkName = "";
+			var checkFlag = false;
+			var statusElem = document.getElementById("check-status");
+			document.getElementById("male").click();
+
+			document.getElementById("uname").oninput = function() {
+				var lowerCase = this.value.toLowerCase();
+
+				if(lowerCase != this.value || lowerCase.length < 6 || lowerCase.length > 16) {
+					checkFlag = false;
+				    statusElem.className = "icon-remove";
+				}else {
+					bjax.chain()
+					    .setURL("login/doCheck?username="+this.value)
+					    .setType("GET")
+					    .setData("")
+					    .setAsync(true)
+					    .tab(console.log) // 这里将在控制台打印当前设置好的数据的object
+					    .success(function(data) {
+					    	if(data == "已存在") {
+					    		checkFlag = false;
+					    		statusElem.className = "icon-remove";
+					    	}else if(data == "不存在") {
+					    		checkFlag = true;
+					    		statusElem.className = "icon-ok";
+					    	}else {
+					    		alert("网络异常")
+					    	}
+					    })
+					    .start();
+				}
+			};
+
+			document.getElementById("form-reg").onsubmit = function() {
+				var username = document.getElementById("uname").value;
+				var password = document.getElementById("psw").value;
+				var confirm = document.getElementById("confirm-psw").value;
+				var confirmElem = document.getElementById("confirm-status");
+				if(!(password === confirm)) {
+					confirmElem.className = "confirm-false";
+					confirmElem.innerHTML = "请确认你的密码是否一致";
+					return false;
+				}else {
+					confirmElem.className = "confirm-true";
+					confirmElem.innerHTML = "密码验证通过";
+				}
+
+				if(!checkFlag)
+					return false;
+			};
 		})();
 	</script>
 </body>
