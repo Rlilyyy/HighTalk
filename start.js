@@ -9,7 +9,7 @@ var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io').listen(http);
 
-http.listen(8889);
+http.listen(8888);
 
 app.use(express.static(path.join(__dirname, '/public/')));
 app.use(bodyParser.urlencoded({
@@ -40,7 +40,6 @@ var onlineCount = 0;
 function updateOnlineRooms(obj) {
 	if(!onlineRooms[obj.rid].users[obj.uid]) {
 		onlineRooms[obj.rid].userCount++;
-		console.log("人数"+onlineRooms[obj.rid].userCount);
 		onlineRooms[obj.rid].users[obj.uid] = {};
 		var user = onlineRooms[obj.rid].users[obj.uid];
 		user.uid = obj.uid;
@@ -66,42 +65,26 @@ io.on('connection', function(socket){
     		userCount: onlineRooms[obj.rid].userCount,
     		users: onlineRooms[obj.rid].users
     	});
-    	io.emit("login", {
+    	io.emit("login"+obj.rid, {
     		uid: obj.uid,
     		nickname: obj.nickname
     	})
     });
 
-
-    //监听新用户加入
-    socket.on('login', function(obj){
-
-
-
-        //将新加入用户的唯一标识当作socket的名称，后面退出的时候会用到
-        socket.name = obj.userid;
-		
-        //检查在线列表，如果不在里面就加入
-        if(!onlineRooms.hasOwnProperty(obj.userid)) {
-            onlineUsers[obj.userid] = obj.username;
-            //在线人数+1
-            onlineCount++;
-        }
-         
-        //向所有客户端广播用户加入
-        io.emit('login', {onlineUsers:onlineUsers, onlineCount:onlineCount, user:obj});
-        console.log(obj.username+'加入了聊天室');
-    });
      
     //监听用户退出
     socket.on('disconnect', function(){
+    	console.log("收到"+socket.rid)
     	if(onlineRooms[socket.rid].users[socket.uid]) {
     		delete onlineRooms[socket.rid].users[socket.uid];
 	    	onlineRooms[socket.rid].userCount--;
 
-	    	var msg = {uid: socket.uid};
-        	io.emit("logout", msg);
-			console.log("消失人数"+onlineRooms[socket.rid].userCount);
+	    	var msg = {
+	    		uid: socket.uid,
+	    		rid: socket.rid
+	    	};
+	    	console.log(socket.rid)
+        	io.emit("logout"+socket.rid, msg);
     	}
     	
         
@@ -120,11 +103,25 @@ io.on('connection', function(socket){
         //     console.log(obj.username+'退出了聊天室');
         // }
     });
+
+    socket.on("logoutRoom", function() {
+    	if(onlineRooms[socket.rid].users[socket.uid]) {
+    		delete onlineRooms[socket.rid].users[socket.uid];
+	    	onlineRooms[socket.rid].userCount--;
+
+	    	var msg = {
+	    		uid: socket.uid,
+	    		rid: socket.rid
+	    	};
+	    	console.log(socket.rid)
+        	io.emit("logout"+socket.rid, msg);
+    	}
+    })
      
     //监听用户发布聊天内容
     socket.on('message', function(obj){
         //向所有客户端广播发布的消息
-        io.emit('message'+obj.roomid, obj);
+        io.emit('message'+obj.rid, obj);
         // console.log(obj.username+'说：'+obj.text);
     });
    
@@ -146,9 +143,9 @@ process.on('uncaughtException', function (err) {
    console.error(err.stack);
  });
 
-var server = app.listen(8888, function () {
-	var host = server.address().address;
-	var port = server.address().port;
+// var server = app.listen(8888, function () {
+// 	var host = server.address().address;
+// 	var port = server.address().port;
 
-	console.log('Example app listening at http://%s:%s', host, port);
-});
+// 	console.log('Example app listening at http://%s:%s', host, port);
+// });
