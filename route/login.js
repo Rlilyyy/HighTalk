@@ -41,6 +41,10 @@ router.route("/login")
 			var str = "select * from " + TABLE_USER + " where username=\"" + req.body.username + "\" and psw=\"" + psw + "\"";
 
 			client.query(str, function(err, results) {
+				if(err) {
+					console.log("注册失败");
+					console.log("注册信息为:"+req.body);
+				}
 				if(results.length) {
 					req.session.user = {};
 					req.session.user.id = results[0].id;
@@ -68,10 +72,14 @@ router.post("/login/doRegister", function(req, res) {
 });
 
 router.get("/login/doCheck", function(req, res) {
-	console.log(req.query)
 	var username = req.query.username;
 	var str = "select username from users where username=\"" + username + "\"";
 	client.query(str, function(err, results) {
+		if(err) {
+			console.log("检查失败");
+			console.log("检查信息为:"+req.query.username);
+			res.send("失败");
+		}
 		if(results.length) {
 			res.send("已存在");
 		}else {

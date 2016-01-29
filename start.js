@@ -9,7 +9,9 @@ var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io').listen(http);
 
-http.listen(8888);
+http.listen(8888, function() {
+	console.log("服务器启动成功");
+});
 
 app.use(express.static(path.join(__dirname, '/public/')));
 app.use(bodyParser.urlencoded({
@@ -31,11 +33,8 @@ var indexRouter = require("./route/index");
 app.use(loginRouter);
 app.use(indexRouter);
 
+// 房间列表
 var onlineRooms = {};
-//在线用户
-var onlineUsers = {};
-//当前在线人数
-var onlineCount = 0;
 
 function updateOnlineRooms(obj) {
 	if(!onlineRooms[obj.rid].users[obj.uid]) {
@@ -75,7 +74,6 @@ io.on('connection', function(socket){
      
     //监听用户退出
     socket.on('disconnect', function(){
-    	console.log("收到"+socket.rid)
     	if(onlineRooms[socket.rid].users[socket.uid]) {
     		delete onlineRooms[socket.rid].users[socket.uid];
 	    	onlineRooms[socket.rid].userCount--;
@@ -85,25 +83,8 @@ io.on('connection', function(socket){
 	    		rid: socket.rid,
 	    		nickname: socket.nickname
 	    	};
-	    	console.log(socket.rid)
         	io.emit("logout"+socket.rid, msg);
     	}
-    	
-        
-        //将退出的用户从在线列表中删除
-        // if(onlineUsers.hasOwnProperty(socket.name)) {
-        //     //退出用户的信息
-        //     var obj = {userid:socket.name, username:onlineUsers[socket.name]};
-             
-        //     //删除
-        //     delete onlineUsers[socket.name];
-        //     //在线人数-1
-        //     onlineCount--;
-             
-        //     //向所有客户端广播用户退出
-        //     io.emit('logout', {onlineUsers:onlineUsers, onlineCount:onlineCount, user:obj});
-        //     console.log(obj.username+'退出了聊天室');
-        // }
     });
 
     socket.on("logoutRoom", function() {
@@ -124,7 +105,6 @@ io.on('connection', function(socket){
     socket.on('message', function(obj){
         //向所有客户端广播发布的消息
         io.emit('message'+obj.rid, obj);
-        // console.log(obj.username+'说：'+obj.text);
     });
    
 });
