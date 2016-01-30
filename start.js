@@ -27,8 +27,8 @@ app.set("views", path.join(__dirname, "views"));
 app.set('view engine', 'html');
 app.engine('html', hbs.__express);
 
-var loginRouter = require("./route/login");
-var indexRouter = require("./route/index");
+var loginRouter = require("./routes/login");
+var indexRouter = require("./routes/index");
 
 app.use(loginRouter);
 app.use(indexRouter);
@@ -96,6 +96,7 @@ io.on('connection', function(socket){
 	    	var msg = {
 	    		uid: socket.uid,
 	    		rid: socket.rid,
+	    		nickname: socket.nickname
 	    	};
 
         	io.emit("logout"+socket.rid, msg);
