@@ -47,9 +47,10 @@ function updateOnlineRooms(obj) {
 }
  
 io.on('connection', function(socket){
-    console.log('a user connected');
-     
+    
     socket.on("init", function(obj) {
+    	console.log(obj.nickname + " connented");
+
     	if(onlineRooms[obj.rid]) {
     		updateOnlineRooms(obj);
     	} else {
