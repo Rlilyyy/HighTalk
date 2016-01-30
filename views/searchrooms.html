@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<title>搜寻{{title}}的结果</title>
+	<style type="text/css">
+		html {
+			font-size: 62.5%;
+			font-family: "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+			background-color: #eff3f5;
+		}
+		body {
+			-webkit-font-smoothing: antialiased;
+		}
+		.results-main {
+			width: 1200px;
+			margin: 0 auto;
+		}
+		.results-main ul {
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			list-style-type: none;
+		}
+		.results-main ul li {
+			float: left;
+			width: 280px;
+			margin-left: 20px;
+			margin-bottom: 20px;
+			padding-top: 15px;
+			border-bottom: 1px solid rgb(217,217,217);
+			background-color: rgba(255,255,255,0.7);
+			transition: 0.5s ease all;
+			-webkit-transition: 0.5s ease all;
+			-moz-transition: 0.5s ease all;
+		}
+		.results-main ul li:hover {
+			background-color: rgba(255,255,255,1);
+			box-shadow: 0 0 5px rgb(217,217,217);
+		}
+		.results-main ul li:hover .room-img {
+			background-size: 105% 105%;
+		}
+		.room-img {
+			background: url('/images/user.jpeg') no-repeat center;
+			background-size: 100% 100%;
+			width: 250px;
+			height: 190px;
+			margin: 0 auto;
+			transition: 0.3s ease all;
+			-webkit-transition: 0.2s ease all;
+			-moz-transition: 0.2s ease all;
+		}
+		.results-main ul li span {
+			display: block;
+			font-size: 1.2rem;
+			color: #34495e;
+			margin-left: 15px;
+			margin-top: 10px;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+		.results-main ul li .room-name {
+			font-size: 1.5rem;
+		}
+		.results-main ul li .room-add {
+			width: 45px;
+			display: block;
+			float: right;
+			margin-right: 15px;
+			margin-bottom: 15px;
+			border-radius: 3px;
+			font-size: 1.3rem;
+			cursor: pointer;
+			text-align: center;
+			color: white;
+			background-color: rgb(0,167,157);
+			-moz-user-select: none;
+		}
+		.results-main ul li .room-add:active {
+			background-color: rgb(0,147,157);
+		}
+		.clear {
+			clear: both;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="results-main">
+		<ul>
+			{{#each results}}
+				<li>
+					<div class="room-img"></div>
+					<span class="room-name">{{this.roomname}}</span>
+					<span>简介：暂无</span>
+					<span class="room-add" onselectstart="return false" data-rid={{this.id}}>加入</span>
+					<div class="clear"></div>
+				</li>
+		    {{/each}}
+			<div class="clear"></div>
+		</ul>
+	</div>
+</body>
+</html>

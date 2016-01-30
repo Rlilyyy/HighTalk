@@ -9,7 +9,7 @@ var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io').listen(http);
 
-http.listen(8888, function() {
+http.listen(80, function() {
 	console.log("服务器启动成功");
 });
 
