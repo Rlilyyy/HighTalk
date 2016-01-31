@@ -1,5 +1,6 @@
 var express = require("express");
 var mysql = require("mysql");
+var moment = require("moment");
 var router = express.Router();
 
 var DATABASE = "hightalk";
@@ -34,11 +35,32 @@ router.get("/index", function(req, res) {
 })
 
 router.get("/index/searchrooms", function(req, res) {
-	var str = "SELECT rooms.* FROM rooms WHERE NOT EXISTS (SELECT * FROM u_r WHERE u_r.uid = \"" + req.query.uid + "\" and u_r.rid=rooms.id) and rooms.roomname LIKE \"%%" + req.query.roomname + "%%\"" ;
-	console.log(str)
-	client.query(str, function(err, results) {
-		res.render("searchrooms", {title: req.query.roomname, results: results});
-	})
+	if(!req.session.user) {
+		res.redirect("/login");
+	}else {
+		var str = "SELECT rooms.* FROM rooms WHERE NOT EXISTS (SELECT * FROM u_r WHERE u_r.uid = \"" + req.query.uid + "\" and u_r.rid=rooms.id) and rooms.roomname LIKE \"%%" + req.query.roomname + "%%\"" ;
+		client.query(str, function(err, results) {
+			res.render("searchrooms", {title: req.query.roomname, results: results, uid: req.session.user.id});
+		})
+	}
+	
+})
+
+router.post("/index/addroom", function(req, res) {
+	if(!req.session.user) {
+		res.redirect("/login");
+	}else {
+		var today = moment().format("YYYY-MM-DD");
+		var str = "insert into u_r(uid,rid,joindate) values (\"" + req.body.uid + "\",\"" + req.body.rid + "\",\"" + today + "\")";
+		client.query(str, function(err, results) {
+			if(err) {
+				res.send("error");
+			}else if(results.affectedRows) {
+				res.send("ok");
+			}
+		});
+	}
+	
 })
 
 module.exports = router;

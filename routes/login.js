@@ -14,11 +14,11 @@ var client = mysql.createConnection({
 client.connect();
 client.query("use " + DATABASE);
 
+
 router.get("/", function(req, res) {
 	if(req.session.user) {
 		res.redirect("/index");
 	}else {
-		// res.render("login", {title: "Hightalk Login"});
 		res.redirect("/login")
 	}
 });
