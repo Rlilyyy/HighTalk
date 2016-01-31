@@ -75,17 +75,18 @@ io.on('connection', function(socket){
      
     //监听用户退出
     socket.on('disconnect', function(){
-    	if(onlineRooms[socket.rid].users[socket.uid]) {
+
+    	if(onlineRooms[socket.rid] && onlineRooms[socket.rid].users[socket.uid]) {
     		delete onlineRooms[socket.rid].users[socket.uid];
 	    	onlineRooms[socket.rid].userCount--;
-
-	    	var msg = {
-	    		uid: socket.uid,
-	    		rid: socket.rid,
-	    		nickname: socket.nickname
-	    	};
-        	io.emit("logout"+socket.rid, msg);
     	}
+
+    	var msg = {
+    		uid: socket.uid,
+    		rid: socket.rid,
+    		nickname: socket.nickname
+    	};
+    	io.emit("logout"+socket.rid, msg);
     });
 
     socket.on("logoutRoom", function() {
