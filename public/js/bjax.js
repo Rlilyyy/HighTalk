@@ -99,6 +99,7 @@
 			};
 
 			xmlHttp.open(copy.type, copy.url, copy.async);
+			xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 			xmlHttp.send(copy.data);
 
 		} else {
