@@ -601,7 +601,7 @@
 						<i class="icon-eye-open"></i>
 					</div>
 					<div class="talk-editor">
-						<textarea id="content-area"></textarea>
+						<textarea id="content-area" wrap="hard"></textarea>
 						<button id="btn-sending">
 							<i class="icon-ok"></i>
 						</button>
@@ -726,9 +726,13 @@
 
 					$("content-area").onkeydown = function(event) {
 						var e = event || window.event;
-						if(e && e.keyCode == 13) {
+						if(e && e.keyCode == 13 && !e.ctrlKey) {
+							console.log(this.value)
 							send();
 							return false;
+						}
+						if(e && e.keyCode == 13 && e.ctrlKey) {
+							this.value += "\n";
 						}
 					}
 
@@ -767,7 +771,7 @@
 
 			var TOOLS = {
 				htmlEscape: function(str) {
-					return str.toString().replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, '&quot;').replace(/ /g, "&nbsp;");
+					return str.toString().replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, '&quot;').replace(/ /g, "&nbsp;").replace(/\n/g, "<br>");
 				}
 			}
 
