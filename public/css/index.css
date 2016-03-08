@@ -1,0 +1,483 @@
+html {
+    height: 100%;
+    font-size: 62.5%;
+    min-width: 1300px;
+    background-color: #eff3f5;
+}
+
+body {
+    font-family: "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.4rem;
+    height: 100%;
+    margin: 0;
+    min-height: 643px;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+}
+header {
+    width: 100%;
+    height: 60px;
+    padding-left: 50px;
+    background-color: rgb(0,167,157);
+    box-sizing: border-box;
+}
+header .ul-all {
+    max-width: 1000px;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+    text-align: center;
+    line-height: 60px;
+    overflow-x: hidden;
+    /*解决ul宽度异常问题*/
+    float: left;
+}
+header .ul-all li {
+    width: 110px;
+    height: 100%;
+    float: left;
+    color: white;
+    font-size: 1.7rem;
+}
+.logo {
+    width: 150px;
+    height: 100%;
+    display: inline-block;
+    background: url('../images/logo.png') left no-repeat;
+    background-size: 250% 100%;
+    float: left;
+}
+header .ul-all .ul-drop {
+    margin: 0;
+    padding: 0;
+    width: 110px;
+    height: 0;
+    list-style-type: none;
+    position: absolute;
+    top: 60px;
+    background-color: rgb(0,167,157);
+    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+    transition: 0.5s ease height;
+    -o-transition: 0.5s ease height;
+    -ms-transition: 0.5s ease height;
+    -moz-transition: 0.5s ease height;
+    -webkit-transition: 0.5s ease height;
+    overflow-y: hidden;
+}
+header .ul-all .ul-drop li {
+    width: 100%;
+    height: 60px;
+}
+header .ul-all .drop-menu:hover .ul-drop {
+    height: 180px;
+}
+header .ul-all .drop-menu:hover #ul-end {
+    height: 60px;
+}
+header .search {
+    float: right;
+    height: 100%;
+    padding-top: 18px;
+    margin-right: 50px;
+    box-sizing: border-box;
+}
+header .search input {
+    width: 0;
+    height: 25px;
+    font-family: "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.5rem;
+    color: white;
+    transition: 0.5s ease width;
+    -o-transition: 0.5s ease width;
+    -ms-transition: 0.5s ease width;
+    -moz-transition: 0.5s ease width;
+    -webkit-transition: 0.5s ease width;
+    border: none;
+    background-color: rgb(0,167,157);
+    margin-left: 10px;
+    box-sizing: border-box;
+    outline: none;
+    cursor: pointer;
+}
+header i {
+    font-size: 2.3rem;
+    font-weight: normal;
+    color: white;
+    vertical-align: middle;
+    transition: 0.5s ease color;
+    -o-transition: 0.5s ease color;
+    -ms-transition: 0.5s ease color;
+    -moz-transition: 0.5s ease color;
+    -webkit-transition: 0.5s ease color;
+    cursor: pointer;
+}
+header i:hover, header i:focus {
+    color: rgb(0,137,157);
+}
+header .search i:active input, header .search i:hover input, header .search i input:hover, header .search i input:focus {
+    border-right: 1px solid rgb(0,137,157);
+    padding-right: 10px;
+    width: 250px;
+    cursor: auto;
+}
+.friends {
+    width: 450px;
+    height: auto;
+    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+    float: right;
+}
+.fri-head {
+    width: 100%;
+    height: 180px;
+    background-color: white;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.fri-head .head-left {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 4px solid rgb(0,167,157);
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    float: left;
+}
+.head-left:before {
+    display: block;
+    width: 133px;
+    height: 133px;
+    border-radius: 50%;
+    content: "";
+    border: 8px solid white;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.fri-head .head-right {
+    width: 100%;
+    height: 100%;
+    padding-left: 160px;
+    padding-top: 10px;
+    box-sizing: border-box;
+}
+.fri-head .head-right .right-default {
+    display: block;
+    width: 100%;
+}
+.fri-head .head-right .right-name {
+    font-size: 3.2rem;
+    font-weight: bold;
+    color: rgb(0,167,157);
+}
+.fri-head .head-right .right-area {
+    font-size: 1.5rem;
+    color: gray;
+}
+.fri-head .head-right .right-signature {
+    font-size: 1.4rem;
+    color: rgb(0,167,157);
+    padding: 15px 0;
+    overflow-x: hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.statistics {
+    width: 100%;
+    height: 80px;
+    background-color: rgb(0,167,157);
+    border-bottom: 1px dashed white;
+    box-sizing: border-box;
+}
+.statistics ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: white;
+    font-size: 2.8rem;
+    font-weight: bold;
+}
+.statistics ul li {
+    width: 33.3333333%;
+    height: 100%;
+    float: left;
+    padding-top: 8px;
+    box-sizing: border-box;
+
+}
+.statistics ul .middle-list {
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+}
+.statistics .stat-default {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: normal;
+}
+
+.fri-main {
+    width: 100%;
+    height: 500px;
+    overflow-y: auto;
+}
+.fri-main ul {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    list-style-type: none;
+}
+.fri-main ul li {
+    width: 100%;
+    height: 100px;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgb(217,217,217);
+    box-sizing: border-box;
+    position: relative;
+    cursor: pointer;
+}
+.fri-main ul li:active {
+    background-color: rgb(228, 228, 228);
+}
+.fri-main ul li .avatar {
+    float: left;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 3px solid rgba(217,217,217,0.8);
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.fri-main ul li .unread-count {
+    display: block;
+    width: auto;
+    height: auto;
+    padding: 0 3px;
+    border-radius: 8px;
+    background-color: red;
+    color: white;
+    font-size: 1.3rem;
+    position: absolute;
+    top: 20px;
+    left: 70px;
+    z-index: 3;
+}
+ .avatar-right {
+    width: 100%;
+    height: 100%;
+    padding-left: 90px;
+    box-sizing: border-box;
+}
+.fri-main ul li .avatar-right .avatar-default {
+    display: block;
+}
+.fri-main ul li .avatar-right .avatar-name {
+    font-size: 1.8rem;
+    color: rgb(0,167,157);
+    margin-top: 10px;
+    overflow-x: hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.avatar-name #rf-count {
+    font-size: 1.4rem;
+    color: gray;
+    padding-left: 5px;
+}
+.fri-main ul li .avatar-right .avatar-tag {
+    font-size: 1.4rem;
+    color: gray;
+    margin-top: 10px;
+    overflow-x: hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.talk-main {
+    height: 760px;
+    margin-right: 450px;
+    border-bottom: 2px solid rgb(0,167,157);
+    border-right: 2px solid rgb(0,167,157);
+    box-sizing: border-box;
+}
+.talk-main-table {
+    width: 100%;
+    height: 730px;
+}
+.talk-initial {
+    width: 100%;
+    height: 30px;
+    background-color: #3fa295;
+    box-shadow: 0px 1px 10px rgba(0,0,0,0.3);
+}
+.talk-users {
+    width: 220px;
+    height: 730px;
+    border-right: 2px solid rgb(0,167,157);
+    float: left;
+    box-sizing: border-box;
+}
+.talk-users ul {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    list-style-type: none;
+}
+.talk-users ul li {
+    width: 100%;
+    height: 41px;
+    border-bottom: 1px solid rgb(217,217,217);
+    padding: 5px;
+    line-height: 30px;
+    box-sizing: border-box;
+}
+
+.talk-users ul li:nth-child(1) i {
+    margin-left: 10px;
+    font-size: 1.5rem;
+    color: rgb(0,167,157);
+    margin-right: 5px;
+}
+.talk-users ul li:nth-child(1) span {
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: rgb(0,167,157);
+    padding: 0 5px;
+    border-radius: 7px;
+    color: white;
+    text-align: center;
+}
+.talk-users ul li .talk-users-img {
+    width: 30px;
+    height: 30px;
+    float: left;
+    border-radius: 50%;
+    border: 1px solid rgb(0,167,157);
+    overflow: hidden;
+    box-sizing: border-box;
+}
+.talk-users ul li #talk-users-nickname {
+    margin-left: 10px;
+}
+.talk-cs {
+    height: 730px;
+    margin-left: 220px;
+    box-sizing: border-box;
+}
+.talk-chating {
+    width: 100%;
+    height: 530px;
+    /*border-bottom: 2px solid rgb(0,167,157);*/
+    padding: 10px 15px 15px 15px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+.talk-chating ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    width: 100%;
+}
+.talk-chating ul li {
+    padding: 10px;
+}
+.talk-chating ul li .join-row .join {
+    display: inline-block !important;
+    height: 30px;
+    padding: 5px 8px;
+    background-color: rgba(199,199,199,0.8);
+    color: white;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+.talk-chating ul li .join-row {
+    text-align: center;
+}
+
+.talk-chating ul li div span:nth-child(1) {
+    display: block;
+    font-size: 1.5rem;
+    margin-left: 8px;
+    word-break:break-all;
+    word-wrap:break-word;
+}
+.talk-chating ul li div span:nth-child(2) {
+    display: inline-block;
+    margin-top: 5px;
+    min-width: 100px;
+    padding: 5px 10px;
+    border-radius: 12px;
+    background-color: rgb(0,167,157);
+    color: white;
+    word-break:break-all;
+    word-wrap:break-word;
+}
+.talk-sending {
+    width: 100%;
+    height: 200px;
+}
+.talk-sending .talk-tools {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    background-color: rgb(0,167,157);
+    padding-left: 20px;
+    font-size: 1.8rem;
+    box-sizing: border-box;
+}
+.talk-sending .talk-tools i {
+    margin-right: 10px;
+    color: rgb(42,42,42);
+}
+.talk-sending .talk-tools i:nth-child(4) {
+    color: red;
+}
+.talk-sending .talk-editor {
+    width: 100%;
+    height: 170px;
+    position: relative;
+}
+.talk-sending .talk-editor textarea {
+    width: 100%;
+    height: 168px;
+    padding: 10px 110px 10px 10px;
+    border-bottom: 2px solid rgb(0,167,157);
+    font-family: "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.5rem;
+    border: none;
+    outline: none;
+    resize:none;
+    word-break:break-all;
+    word-wrap:break-word;
+    box-sizing: border-box;
+}
+.talk-sending .talk-editor #btn-sending {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    font-size: 3.5rem;
+    font-weight: 100;
+    background-color: rgb(0,167,157);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    top: 50%;
+    right: 30px;
+    margin-top: -30px;
+    box-shadow: 0 3px 10px black;
+    outline: none;
+    transition: 0.2s ease all;
+    -o-transition: 0.2s ease all;
+    -ms-transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+.talk-sending .talk-editor #btn-sending:active {
+    box-shadow: 0 0 2px rgb(42,42,42);;
+    background-color: rgb(0,147,157);
+}
