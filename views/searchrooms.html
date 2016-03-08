@@ -106,30 +106,31 @@
 	<script src="/js/bjax.js"></script>
 	<script type="text/javascript">
 		document.getElementById("rooms-ul").onclick = function() {
-			var target = event.srcElement || event.target;
+			// var target = event.srcElement || event.target;
+			console.log(window.event)
 
-			var rid = target.dataset.rid;
-			var uid = this.dataset.uid;
-			console.log(this)
+			// var rid = target.dataset.rid;
+			// var uid = this.dataset.uid;
+			// console.log(this)
 
-			if(rid && uid) {
-				var data = {uid: uid, rid:rid};
-				console.log(data)
-				bjax.chain()
-				    .setURL("/index/addroom")
-				    .setType("POST")
-				    .setData("uid="+uid+"&rid="+rid)
-				    .setAsync(true)
-				    .tab(console.log) // 这里将在控制台打印当前设置好的数据的object
-				    .success(function(data) {
-				    	if(data == "ok") {
-				    		window.location.href = "/index";
-				    	}else {
-				    		console.log("falied");
-				    	}
-				    })
-				    .start();
-			}
+			// if(rid && uid) {
+			// 	var data = {uid: uid, rid:rid};
+			// 	console.log(data)
+			// 	bjax.chain()
+			// 	    .setURL("/index/addroom")
+			// 	    .setType("POST")
+			// 	    .setData("uid="+uid+"&rid="+rid)
+			// 	    .setAsync(true)
+			// 	    .tab(console.log) // 这里将在控制台打印当前设置好的数据的object
+			// 	    .success(function(data) {
+			// 	    	if(data == "ok") {
+			// 	    		window.location.href = "/index";
+			// 	    	}else {
+			// 	    		console.log("falied");
+			// 	    	}
+			// 	    })
+			// 	    .start();
+			// }
 		}
 	</script>
 </body>

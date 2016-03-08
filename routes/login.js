@@ -11,8 +11,21 @@ var client = mysql.createConnection({
 	user: "root",
 	password: "8605358aa"
 });
-client.connect();
+
+client.connect(function(err) {
+	if(err) {
+		DBhandler();
+	}
+});
 client.query("use " + DATABASE);
+
+var DBhandler = function() {
+	client.connect(function(err) {
+		if(err) {
+			DBhandler();
+		}
+	});
+}
 
 
 router.get("/", function(req, res) {
